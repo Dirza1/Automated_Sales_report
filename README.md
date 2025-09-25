@@ -99,15 +99,6 @@ Example log:
 └── README.md            # Documentation
 ```
 
----
-
-## 🚀 Future Improvements
-- Add support for multiple Excel input files in a folder.  
-- Parameterize input/output paths via CLI arguments.  
-- Export KPI reports to a separate Excel workbook or PDF.  
-- Add unit tests for validation.  
-
----
 
 ## 📖 Learning Goals
 This project was created as part of a portfolio to showcase:
