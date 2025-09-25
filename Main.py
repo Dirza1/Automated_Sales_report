@@ -1,5 +1,6 @@
 from openpyxl import load_workbook,Workbook
 from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.chart import BarChart, Reference
 from collections import defaultdict
 import openpyxl
 import logging
@@ -74,7 +75,66 @@ def main() -> None:
                 products[product][0] += count
                 products[product][1] += total
             
-    print(f"customers = {customers}. Products = {products}")
+    
+    #we can now generate a new tab with this information in the same excel sheet.
+    #we will also add a nice bar graph to the sheet voor data visualisation
+    export_data_customer:Worksheet = imput_excel.create_sheet("Customer KPI's")
+    count = 2
+
+    export_data_customer.cell(row=1,column=1).value = "Customer"# type: ignore
+    export_data_customer.cell(row=1,column=2).value = "Total Orders"# type: ignore
+    export_data_customer.cell(row=1,column=3).value = "Total Value"# type: ignore
+
+    for customer, value in customers.items():
+        export_data_customer.cell(row=count,column=1).value = customer# type: ignore
+        export_data_customer.cell(row=count,column=2).value = value[0]
+        export_data_customer.cell(row=count,column=3).value = value[1]
+        count += 1
+    
+    chart:BarChart = BarChart()
+    chart.type = "col"
+    chart.title = "Customer KPI's"
+    chart.x_axis.title = "Customer" # type: ignore
+    chart.y_axis.title = "Total" # type: ignore
+    chart.legend = None
+
+    data = Reference(export_data_customer,min_col=2, min_row=2, max_row=count-1,max_col=3)
+    categories = Reference(export_data_customer, min_col=1, max_col=1,min_row=2,max_row=count-1)
+    chart.add_data(data=data,titles_from_data=True)
+    chart.set_categories(categories)
+
+    export_data_customer.add_chart(chart, "E1")
+
+    export_data_product:Worksheet = imput_excel.create_sheet("Product KPI's")
+    count = 2
+
+    export_data_product.cell(row=1,column=1).value = "Product"# type: ignore
+    export_data_product.cell(row=1,column=2).value = "Total sold"# type: ignore
+    export_data_product.cell(row=1,column=3).value = "Total Value" # type: ignore
+
+    for product, value in products.items():
+        export_data_product.cell(row=count,column=1).value = product # type: ignore
+        export_data_product.cell(row=count,column=2).value = value[0]
+        export_data_product.cell(row=count,column=3).value = value[1]
+        count += 1
+    
+    chart:BarChart = BarChart()
+    chart.type = "col"
+    chart.title = "Product KPI's"
+    chart.x_axis.title = "Product" # type: ignore
+    chart.y_axis.title = "Total" # type: ignore
+    chart.legend = None
+
+    data = Reference(export_data_product,min_col=2, min_row=2, max_row=count-1,max_col=3)
+    categories = Reference(export_data_product, min_col=1, max_col=1,min_row=2,max_row=count-1)
+    chart.add_data(data=data,titles_from_data=True)
+    chart.set_categories(categories)
+
+    export_data_product.add_chart(chart, "E1")
+
+    #then at the verry end we save the file
+
+    imput_excel.save(filename="example_sales.xlsx")
 
 
 
