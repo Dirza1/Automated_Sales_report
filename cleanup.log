@@ -1,4 +1,4 @@
-2025-09-25 15:04:13 [ERROR] Missing OderID in row 4. This row was removed from the summary
-2025-09-25 15:04:13 [WARNING] Missing data in row 5. Data was set to a default value
-2025-09-25 15:04:13 [ERROR] Missing either count or price in row 6. This row is removed from the summary
-2025-09-25 15:04:13 [ERROR] Missing either count or price in row 8. This row is removed from the summary
+2025-09-25 15:09:52 [ERROR] Missing OderID in row 4. This row was removed from the summary
+2025-09-25 15:09:52 [WARNING] Missing data in row 5. Data was set to a default value
+2025-09-25 15:09:52 [ERROR] Missing either count or price in row 6. This row is removed from the summary
+2025-09-25 15:09:52 [ERROR] Missing either count or price in row 8. This row is removed from the summary

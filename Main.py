@@ -96,9 +96,11 @@ def main() -> None:
     chart.title = "Customer KPI's"
     chart.x_axis.title = "Customer" # type: ignore
     chart.y_axis.title = "Total" # type: ignore
-    chart.legend = None
+    chart.x_axis.delete = False
+    chart.y_axis.delete = False
 
-    data = Reference(export_data_customer,min_col=2, min_row=2, max_row=count-1,max_col=3)
+
+    data = Reference(export_data_customer,min_col=2, min_row=1, max_row=count-1,max_col=3)
     categories = Reference(export_data_customer, min_col=1, max_col=1,min_row=2,max_row=count-1)
     chart.add_data(data=data,titles_from_data=True)
     chart.set_categories(categories)
@@ -123,9 +125,11 @@ def main() -> None:
     chart.title = "Product KPI's"
     chart.x_axis.title = "Product" # type: ignore
     chart.y_axis.title = "Total" # type: ignore
-    chart.legend = None
+    chart.x_axis.delete = False
+    chart.y_axis.delete = False
 
-    data = Reference(export_data_product,min_col=2, min_row=2, max_row=count-1,max_col=3)
+
+    data = Reference(export_data_product,min_col=2, min_row=1, max_row=count-1,max_col=3)
     categories = Reference(export_data_product, min_col=1, max_col=1,min_row=2,max_row=count-1)
     chart.add_data(data=data,titles_from_data=True)
     chart.set_categories(categories)
